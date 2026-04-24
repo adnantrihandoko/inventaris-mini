@@ -1,58 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 Sistem Inventaris Mini
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web sederhana untuk mengelola data inventaris barang, dibangun menggunakan **Laravel 11** dan **MySQL/MariaDB**. Proyek ini dikerjakan sebagai bagian dari Ujian Praktik Web Development dengan fokus pada pengelolaan relasi database (One-to-Many) dan implementasi antarmuka yang bersih, modern, serta responsif.
 
-## About Laravel
+[Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?logo=laravel)
+[PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php)
+[Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap)
+[MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **CRUD Lengkap** – Tambah, lihat, edit, dan hapus data barang.
+- **Relasi Kategori** – Setiap barang terhubung dengan kategori melalui dropdown dinamis.
+- **Pencarian Real-time** – Filter barang berdasarkan nama secara instan.
+- **Validasi Input** – Form tidak dapat dikirim jika ada data yang kosong atau tidak valid.
+- **Sistem Login** (opsional) – Akses aman menggunakan Laravel Breeze (login, register, lupa password).
+- **Tampilan Modern** – Desain bersih dengan Bootstrap 5, Google Fonts, dan ikon Bootstrap Icons.
+- **Responsif** – Nyaman digunakan di desktop maupun perangkat mobile.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🖼️ Tangkapan Layar
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Halaman | Preview |
+|--------|---------|
+| Beranda | ![Beranda](screenshots/welcome.png) |
+| Daftar Barang | ![Daftar Barang](screenshots/items-index.png) |
+| Form Tambah | ![Tambah Barang](screenshots/items-create.png) |
+| Halaman Login | ![Login](screenshots/login.png) |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🗃️ Struktur Database
+
+Proyek menggunakan dua tabel utama dengan relasi One-to-Many:
+
+**Tabel `categories`**
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | bigint (PK) | Primary key |
+| nama_kategori | varchar | Nama kategori |
+| created_at | timestamp | Waktu dibuat |
+| updated_at | timestamp | Waktu diperbarui |
+
+**Tabel `items`**
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| id | bigint (PK) | Primary key |
+| nama_barang | varchar | Nama barang |
+| stok | int | Jumlah stok |
+| kategori_id | bigint (FK) | Foreign key ke categories.id |
+| created_at | timestamp | Waktu dibuat |
+| updated_at | timestamp | Waktu diperbarui |
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Backend:** Laravel 11, PHP 8.1+
+- **Database:** MySQL / MariaDB
+- **Frontend:** Blade templating, Bootstrap 5, Bootstrap Icons
+- **Font:** DM Sans & DM Serif Display (Google Fonts)
+- **Autentikasi (opsional):** Laravel Breeze (Blade)
+
+---
+
+## 🚀 Cara Menjalankan Proyek
+
+### Prasyarat
+- PHP >= 8.1
+- Composer
+- MySQL / MariaDB
+- Node.js & NPM (opsional, jika menggunakan Vite/Breeze)
+
+### Langkah-langkah
+
+1. **Clone repositori**
+   ```bash
+   git clone https://github.com/username/inventaris-mini.git
+   cd inventaris-mini
+   ```
+
+2. **Instal dependensi PHP**
+   ```bash
+   composer install
+   ```
+
+3. **Konfigurasi environment**
+   - Salin file `.env.example` menjadi `.env`
+   - Sesuaikan pengaturan database:
+     ```env
+     DB_DATABASE=inventaris_db
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+
+4. **Generate application key**
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Jalankan migrasi dan seeder**
+   ```bash
+   php artisan migrate --seed
+   ```
+   > Seeder akan mengisi beberapa data kategori awal (Elektronik, ATK, Olahraga, Dapur).
+
+6. **Instal dan build frontend**
+   ```bash
+   npm install && npm run dev
+   ```
+
+7. **Jalankan server lokal**
+   ```bash
+   php artisan serve
+   ```
+
+8. **Buka browser** di `http://localhost:8000`
+
+### Login
+- Klik **Register** untuk membuat akun baru,
+
+---
+
+## 📁 File SQL
+
+File `database.sql` tersedia di root repositori. Anda dapat mengimpornya langsung ke MySQL/MariaDB untuk mendapatkan struktur dan data awal tanpa menjalankan migrasi.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+mysql -u root -p inventaris_db < database.sql
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 📂 Struktur Folder Penting
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+inventaris-mini/
+├── app/
+│   ├── Http/Controllers/ItemController.php
+│   └── Models/
+│       ├── Item.php
+│       └── Category.php
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── database.sql
+├── resources/views/
+│   ├── layouts/
+│   │   ├── app.blade.php
+│   │   └── guest.blade.php
+│   ├── items/
+│   │   ├── index.blade.php
+│   │   ├── create.blade.php
+│   │   └── edit.blade.php
+│   ├── auth/
+│   │   ├── login.blade.php
+│   │   ├── register.blade.php
+│   │   └── ...
+│   └── welcome.blade.php
+├── routes/
+│   └── web.php
+└── README.md
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ✨ Poin Plus yang Diimplementasikan
 
-## Security Vulnerabilities
+- [x] Fitur Edit dan Hapus barang
+- [x] Sistem Login sederhana (register, login, logout)
+- [x] Tampilan antarmuka yang bersih, modern, dan responsif
+- [x] Validasi form dengan pesan error yang informatif
+- [x] Paginasi pada daftar barang
+- [x] Styling konsisten di seluruh halaman
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 📝 Lisensi
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini bersifat open-source dan tersedia di bawah [lisensi MIT](LICENSE).
+
+---
+
+## 👨‍💻 Tentang Proyek
+
+Proyek ini dibuat untuk memenuhi **Ujian Praktik Web Development** dengan fokus pada pengelolaan relasi database One-to-Many. Semua kode sumber, struktur database, dan dokumentasi disediakan secara lengkap agar dapat di-review dan dijalankan dengan mudah.
+
+---
+
+Dibuat dengan ❤️ menggunakan Laravel  
+© 2026 Adnan Tri Handoko
+
+---
